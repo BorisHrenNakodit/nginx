@@ -3,7 +3,7 @@ stages:
   - push
 
 variables:
-  IMAGE_NAME: $DOCKERHUB_USERNAME/your-image-name
+  IMAGE_NAME: $DOCKERHUB_USERNAME/mynginx
 
 before_script:
   - |
