@@ -3,6 +3,8 @@ stages:
   - deploy
 
 variables:
+  GIT_STRATEGY: clone 
+  GIT_DEPTH: 0
   IMAGE_NAME: $DOCKERHUB_USERNAME/mynginx
 
 build_and_push:
