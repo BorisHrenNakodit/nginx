@@ -1,5 +1,6 @@
 stages:
   - build_and_push
+  - deploy
 
 variables:
   IMAGE_NAME: $DOCKERHUB_USERNAME/mynginx
@@ -25,6 +26,20 @@ build_and_push:
 
       docker push $IMAGE_NAME:$IMAGE_TAG
       docker push $IMAGE_NAME:latest
+  only:
+    - main
+    - tags
+
+deploy:
+  stage: deploy
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: [""]
+  script:
+    - echo "$KUBECONFIG" > kubeconfig.yaml
+    - export KUBECONFIG=$PWD/kubeconfig.yaml
+    - |
+      kubectl set image deployment/dp-nginx nginx=$IMAGE_NAME:latest --namespace=app
   only:
     - main
     - tags
