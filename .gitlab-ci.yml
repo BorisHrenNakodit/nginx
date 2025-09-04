@@ -36,7 +36,7 @@ deploy:
     name: bitnami/kubectl:latest
     entrypoint: [""]
   script:
-    - echo "$KUBECONFIG" | base64 -d > kubeconfig.yaml
+    - echo "$KUBECONFIG" > kubeconfig.yaml
     - export KUBECONFIG=$PWD/kubeconfig.yaml
     - |
       kubectl set image deployment/dp-nginx nginx=$IMAGE_NAME:latest --namespace=app
